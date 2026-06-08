@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+{% load static %}
+
+<link rel="stylesheet"
+href="{% static 'style.css' %}">
+
+<title>Feed</title>
+
+</head>
+
+<body>
+
+<div class="navbar">
+
+<h2>
+
+Welcome {{request.user.username}}
+
+</h2>
+
+<div>
+
+<a href="/delete/">
+
+Delete Account
+
+</a>
+
+&nbsp;&nbsp;
+
+<a href="/logout/">
+
+Logout
+
+</a>
+
+</div>
+
+</div>
+
+<div class="container">
+
+<div class="post-box">
+
+<h2>
+
+Create New Post
+
+</h2>
+
+<form method="POST">
+
+{% csrf_token %}
+
+{{form.as_p}}
+
+<button>
+
+Post
+
+</button>
+
+</form>
+
+</div>
+
+<h2>
+
+Your Posts
+
+</h2>
+
+{% for post in posts %}
+
+<div class="post">
+
+<h3>
+
+{{post.user.username}}
+
+</h3>
+
+<p>
+
+{{post.content}}
+
+</p>
+
+<small>
+
+{{post.created_at}}
+
+</small>
+
+</div>
+
+{% empty %}
+
+<p>
+
+No Posts Yet
+
+</p>
+
+{% endfor %}
+
+</div>
+
+</body>
+
+</html>
